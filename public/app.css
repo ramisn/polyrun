@@ -1,6 +1,6 @@
 body {
 	font-family: "Roboto";
-	color: #222;
+	color: #333;
 	margin: 0;
 }
 
@@ -21,6 +21,11 @@ input, .chooseBtn {
 	font: 400 17px "Roboto";
 }
 
+a {
+	text-decoration: none;
+	color: #333; 
+}
+
 input[type=file] {
 	display: none;
 }
@@ -34,7 +39,7 @@ form {
 }
 
 .box {
-	padding: 15px; 
+	padding: 20px; 
 	text-align: center;
 	width: 50%;
 	height: 280px;
