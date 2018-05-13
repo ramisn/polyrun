@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="box">
-		<h2>Upload a GPX file:</h2>
+		<h2>Upload a GPX file</h2>
 		<form enctype="multipart/form-data" method="post" action="/upload">
 			<label class="chooseBtn">
     			<input name="gpxFile" type="file" id="fileUpload">
@@ -15,6 +15,13 @@
 			<input type="submit" name="send" value="Send">
 		</form>
 		<span id="nameDisplay"></span>
+		<div>
+			<% if (errorMessage && errorMessage.length > 1) { %>
+                <div class="flash-message" role="alert">
+                    <%= errorMessage %>
+                </div>
+	        <% } %>
+        </div>
 	</div>
 	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

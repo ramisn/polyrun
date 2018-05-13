@@ -6,7 +6,8 @@
 ---
 - [x] Initial setup.
 - [x] Manually add files.
-- [ ] Restrictions.
+- [x] Restrictions.
+- [ ] Use flash, refactor.
 - [ ] Integrate DB.
 - [ ] Multiple files.
 - [ ] Responsive design.

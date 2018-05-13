@@ -1,4 +1,6 @@
 var	express     = require("express"),
+    flash       = require("connect-flash"),
+    session     = require("express-session"),
 	mongoose    = require("mongoose"),
 	fs          = require("fs"),
     multer      = require("multer"),
@@ -9,14 +11,41 @@ var	express     = require("express"),
 	db          = require("./models/Track"),
 	//midware = require("./middleware"),
 	app         = express(),
-    upload      = multer({dest: "uploads/"}),
+    upload      = multer({
+        storage: multer.diskStorage({
+            destination: function(req, file, next) {
+                next(null, "./uploads")
+            }
+        }),
+        fileFilter: function(req, file, next) {
+            if (!file) next();
+            else {
+                if (file.mimetype && file.mimetype.includes("gpx")) {
+                    next(null, true);
+                } else {
+                    next({message: "file not supported."}, false);
+                }
+            }
+        },
+        limits: {
+            fileSize: 700000
+        }
+    }).single("gpxFile"),
 	port        = process.env.PORT || 5555;
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://george:pw@ds217560.mlab.com:17560/polyrun');
+//mongoose.Promise = global.Promise;
+//mongoose.connect('mongodb://george:pw@ds217560.mlab.com:17560/polyrun');
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/views"));
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+app.use(flash());
+app.set("view engine", "ejs");
 
 var test = {
     "type": "FeatureCollection",
@@ -2498,21 +2527,27 @@ var test = {
 }
 
 app.get("/", function(req, res) {
-    res.sendFile("./views/index.html", {"root": __dirname});
+    res.render("index");
 });
 
 app.get("/upload", function(req, res) {
-    res.sendFile("./views/upload.html", {"root": __dirname});
+    res.render("upload", {errorMessage: ""});
 });
 
-app.post("/upload", upload.single("gpxFile"), function(req, res) {
-    var name = req.file.filename;
-    var gpxParsed = new DOMParser().parseFromString(fs.readFileSync("./uploads/" + name, "utf-8"));
-    var geoj = togeojson.gpx(gpxParsed);
-    delete geoj.features[0].properties.coordTimes;
-    geoj.features[0].properties.desc = geotools.getDistance(geoj.features[0].geometry.coordinates);
-    fs.unlink("./uploads/" + name);
-    res.send(geoj);
+app.post("/upload", function(req, res) {
+    upload(req, res, function(err) {
+        if(!err) {
+            var name = req.file.filename;
+            var gpxParsed = new DOMParser().parseFromString(fs.readFileSync("./uploads/" + name, "utf-8"));
+            var geoj = togeojson.gpx(gpxParsed);
+            delete geoj.features[0].properties.coordTimes;
+            geoj.features[0].properties.desc = geotools.getDistance(geoj.features[0].geometry.coordinates);
+            fs.unlink("./uploads/" + name);
+            res.send(geoj);
+        } else {
+            res.render("upload", {errorMessage: "File not supported or bigger than 700kB."});
+        }
+    });
 });
 
 app.get("/testing", function(req, res) {
