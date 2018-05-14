@@ -1,12 +1,14 @@
+html {height: 100%;}
 body {
 	font-family: "Roboto";
 	color: #444;
 	margin: 0;
+	height: 100%;
 }
 
 #map {
 	width: 100%;
-	height: 674px;
+	height: 100%;
 	margin: 0 auto;
 }
 
@@ -26,22 +28,24 @@ a {
 	color: #333; 
 }
 
+a[href="/"] {
+	color: #5ac9c7;
+	position: absolute;
+	bottom: 10%;
+	left: 0;
+	right: 0;
+}
+
 h2 {
 	margin: 0;
 	padding: 20px;
 }
 
-input[type=file] {
-	display: none;
-}
+input[type=file] {display: none;}
 
-span {
-	font-size: 13px;
-}
+span {font-size: 13px;}
 
-form {
-	margin-top: 50px;
-}
+form {margin-top: 50px;}
 
 .box {
 	text-align: center;
@@ -51,9 +55,7 @@ form {
 	background-color: #eee;
 }
 
-input:hover, .chooseBtn:hover {
-	opacity: 0.8;
-}
+input:hover, .chooseBtn:hover {opacity: 0.8;}
 
 .flash-message {
 	opacity: 0.8;
@@ -76,7 +78,5 @@ input:hover, .chooseBtn:hover {
 		padding: 12px;
 		margin: 8px;
 	}
-	input {
-		width: 204px;
-	}
+	input {width: 204px;}
 }

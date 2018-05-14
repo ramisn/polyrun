@@ -10,6 +10,7 @@
 - [ ] Use flash, refactor.
 - [ ] Multiple files.
 - [ ] Integrate DB.
-- [ ] Responsive design.
+- [x] Responsive design.
 - [ ] Other formats.
+- [ ] PWA?
 - [ ] ...
