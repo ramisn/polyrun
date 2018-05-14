@@ -1,6 +1,6 @@
 body {
 	font-family: "Roboto";
-	color: #333;
+	color: #444;
 	margin: 0;
 }
 
@@ -17,13 +17,18 @@ input, .chooseBtn {
 	margin: 5px;
 	outline: none;
 	border-style: none;
-	background-color: #eee;
+	background-color: #5ac9c7;
 	font: 400 17px "Roboto";
 }
 
 a {
 	text-decoration: none;
 	color: #333; 
+}
+
+h2 {
+	margin: 0;
+	padding: 20px;
 }
 
 input[type=file] {
@@ -39,12 +44,11 @@ form {
 }
 
 .box {
-	padding: 20px; 
 	text-align: center;
 	width: 50%;
 	height: 280px;
 	margin: 50px auto;
-	background-color: #5ac9c7;
+	background-color: #eee;
 }
 
 input:hover, .chooseBtn:hover {
@@ -57,4 +61,22 @@ input:hover, .chooseBtn:hover {
 	width: 200px;
 	margin: 0 auto;
 	padding: 5px;
+}
+
+@media screen and (max-width: 630px) {
+	html, body { height: 100%; margin: 0px; padding: 0 0 0 0; overflow: hidden;}
+	body {}
+	.box {
+		margin: 0 auto; 
+		width: 100%;
+		height: 100%;
+	}
+	input, .chooseBtn {
+		width: 180px;
+		padding: 12px;
+		margin: 8px;
+	}
+	input {
+		width: 204px;
+	}
 }
