@@ -14,7 +14,7 @@
 		<h2><a href="/upload">Upload a GPX file</a></h2>
 		<form enctype="multipart/form-data" method="post" action="/upload">
 			<label class="chooseBtn">
-    			<input name="gpxFile" type="file" id="fileUpload">
+    			<input name="gpxFile" type="file" id="fileUpload" multiple>
     			Choose file
 				</label>
 			<input type="submit" name="send" value="Send">
@@ -31,6 +31,6 @@
 	</div>
 	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="upload.js"></script>
+	<script type="text/javascript" src="./js/upload.js"></script>
 </body>
 </html>

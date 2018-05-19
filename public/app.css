@@ -1,9 +1,9 @@
 html {height: 100%;}
 body {
 	font-family: "Roboto";
-	color: #444;
 	margin: 0;
 	height: 100%;
+	background-color: #343332;
 }
 
 #map {
@@ -13,10 +13,11 @@ body {
 }
 
 input, .chooseBtn {
+	color: #222;
 	display: inline-block;
 	width: 25%;
 	padding: 10px;
-	margin: 5px;
+	margin: 5px 5px 10px 5px;
 	outline: none;
 	border-style: none;
 	background-color: #5ac9c7;
@@ -25,7 +26,7 @@ input, .chooseBtn {
 
 a {
 	text-decoration: none;
-	color: #333; 
+	color: #eee; 
 }
 
 a[href="/"] {
@@ -43,7 +44,7 @@ h2 {
 
 input[type=file] {display: none;}
 
-span {font-size: 13px;}
+span {font-size: 13px; color: #eee; padding-top: 5px;}
 
 form {margin-top: 50px;}
 
@@ -52,7 +53,6 @@ form {margin-top: 50px;}
 	width: 50%;
 	height: 280px;
 	margin: 50px auto;
-	background-color: #eee;
 }
 
 input:hover, .chooseBtn:hover {opacity: 0.8;}
@@ -66,10 +66,10 @@ input:hover, .chooseBtn:hover {opacity: 0.8;}
 }
 
 @media screen and (max-width: 630px) {
-	html, body { height: 100%; margin: 0px; padding: 0 0 0 0; overflow: hidden;}
-	body {}
+	html, body { height: 100%; margin: 0; padding: 0 0 0 0; overflow: hidden;}
 	.box {
-		margin: 0 auto; 
+		margin: 0 auto;
+		margin-top: 30px;
 		width: 100%;
 		height: 100%;
 	}

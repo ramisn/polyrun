@@ -8,7 +8,7 @@
 - [x] Manually add files.
 - [x] Restrictions.
 - [ ] Use flash, refactor.
-- [ ] Multiple files.
+- [x] Multiple files.
 - [ ] Integrate DB.
 - [x] Responsive design.
 - [ ] Other formats.
