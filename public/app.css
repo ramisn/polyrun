@@ -3,7 +3,7 @@ body {
 	font-family: "Roboto";
 	margin: 0;
 	height: 100%;
-	background-color: #343332;
+	background-color: #333;
 }
 
 #map {
@@ -63,6 +63,7 @@ input:hover, .chooseBtn:hover {opacity: 0.8;}
 	width: 200px;
 	margin: 0 auto;
 	padding: 5px;
+	color: #eee;
 }
 
 @media screen and (max-width: 630px) {

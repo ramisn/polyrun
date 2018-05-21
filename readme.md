@@ -9,7 +9,8 @@
 - [x] Restrictions.
 - [ ] Use flash, refactor.
 - [x] Multiple files.
-- [ ] Integrate DB.
+- [x] Integrate DB.
+- [ ] Rendering.
 - [x] Responsive design.
 - [ ] Other formats.
 - [ ] PWA?

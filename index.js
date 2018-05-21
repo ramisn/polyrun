@@ -8,7 +8,7 @@ var	express     = require("express"),
 	geotools    = require("geojson-tools"),
 	togeojson   = require("togeojson"),
     DOMParser   = require("xmldom").DOMParser;
-	db          = require("./models/Track"),
+	Track       = require("./models/Track"),
 	//midware = require("./middleware"),
 	app         = express(),
     upload      = multer({
@@ -32,8 +32,8 @@ var	express     = require("express"),
         }
     }).array("gpxFile", 20),
 	port        = process.env.PORT || 4545;
-//mongoose.Promise = global.Promise;
-//mongoose.connect('mongodb://george:pw@ds217560.mlab.com:17560/polyrun');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://george:pw@ds217560.mlab.com:17560/polyrun');
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/views"));
@@ -52,32 +52,33 @@ app.get("/", function(req, res) {
 });
 
 app.get("/upload", function(req, res) {
-    res.render("upload", {errorMessage: ""});
+    res.render("upload", {message: ""});
 });
 
 app.post("/upload", function(req, res) {
-    upload(req, res, function(err) {
+	upload(req, res, function(err) {
         if(!err) {
-            var upfiles = {};
             for (file of req.files) {
-                var name = file.filename;
-                var gpxParsed = new DOMParser().parseFromString(fs.readFileSync("./uploads/" + name, "utf-8"));
+                var gpxParsed = new DOMParser().parseFromString(fs.readFileSync("./uploads/" + file.filename, "utf-8"));
                 var geoj = togeojson.gpx(gpxParsed);
                 delete geoj.features[0].properties.coordTimes;
-                geoj.features[0].properties.desc = geotools.getDistance(geoj.features[0].geometry.coordinates);
-                fs.unlink("./uploads/" + name);
-                upfiles[file.size] = geoj;
+                fs.unlink("./uploads/" + file.filename);
+                var newTrack = {
+                    name: file.originalname,
+                    data: geoj,
+                    dist_km: geotools.getDistance(geoj.features[0].geometry.coordinates)
+                };
+                var message = "";
+                Track.create(newTrack, function(err, newlyCreated) {
+                    if (err || !newlyCreated) { message = "Error while uploading file(s)."; }
+                });
             }
-            res.send(upfiles);
+            message = "Successfully added track(s).";
+            res.render("upload", {message: message});
         } else {
-            res.render("upload", {errorMessage: "A file is not supported or bigger than 700kB."});
+            res.render("upload", {message: "A file is not supported or bigger than 700kB."});
         }
     });
-});
-
-app.get("/testing", function(req, res) {
-	var dist = geotools.getDistance(test.features[0].geometry.coordinates);
-	res.send(dist + "km");
 });
 
 app.listen(port, function() {

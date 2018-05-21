@@ -21,9 +21,9 @@
 		</form>
 		<span id="nameDisplay"></span>
 		<div>
-			<% if (errorMessage && errorMessage.length > 1) { %>
+			<% if (message && message.length > 1) { %>
                 <div class="flash-message" role="alert">
-                    <%= errorMessage %>
+                    <%= message %>
                 </div>
 	        <% } %>
         </div>
