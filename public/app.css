@@ -4,6 +4,7 @@ body {
 	margin: 0;
 	height: 100%;
 	background-color: #333;
+	overflow: hidden;
 }
 
 #map {
@@ -20,7 +21,7 @@ input, .chooseBtn {
 	margin: 5px 5px 10px 5px;
 	outline: none;
 	border-style: none;
-	background-color: #5ac9c7;
+	background-color: #385;
 	font: 400 17px "Roboto";
 }
 
@@ -30,7 +31,6 @@ a {
 }
 
 a[href="/"] {
-	color: #5ac9c7;
 	position: absolute;
 	bottom: 10%;
 	left: 0;
@@ -39,7 +39,8 @@ a[href="/"] {
 
 h2 {
 	margin: 0;
-	padding: 20px;
+	padding-top: 30px;
+	
 }
 
 input[type=file] {display: none;}
@@ -53,6 +54,26 @@ form {margin-top: 50px;}
 	width: 50%;
 	height: 280px;
 	margin: 50px auto;
+}
+
+.uploadBtn {
+	position: absolute;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	bottom: 30px;
+	right: 30px;
+	background-color: #385;
+}
+
+.uploadBtn h1 {
+	margin: 0;
+	padding: 3px 0 0 0;
+	text-align: center;
+}
+
+.uploadBtn:hover {
+	opacity: 0.8;
 }
 
 input:hover, .chooseBtn:hover {opacity: 0.8;}

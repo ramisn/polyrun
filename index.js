@@ -9,7 +9,7 @@ var	express     = require("express"),
 	togeojson   = require("togeojson"),
     DOMParser   = require("xmldom").DOMParser;
 	Track       = require("./models/Track"),
-	//midware = require("./middleware"),
+	midware     = require("./middleware/middleware"),
 	app         = express(),
     upload      = multer({
         storage: multer.diskStorage({
@@ -33,7 +33,7 @@ var	express     = require("express"),
     }).array("gpxFile", 20),
 	port        = process.env.PORT || 4545;
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://george:pw@ds217560.mlab.com:17560/polyrun');
+mongoose.connect('mongodb://@ds217560.mlab.com:17560/polyrun');
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/views"));
@@ -48,7 +48,7 @@ app.use(flash());
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res) {
-    res.render("index");
+    midware.loadTracks(res);
 });
 
 app.get("/upload", function(req, res) {
@@ -61,11 +61,19 @@ app.post("/upload", function(req, res) {
             for (file of req.files) {
                 var gpxParsed = new DOMParser().parseFromString(fs.readFileSync("./uploads/" + file.filename, "utf-8"));
                 var geoj = togeojson.gpx(gpxParsed);
-                delete geoj.features[0].properties.coordTimes;
+                var coords = geoj.features[0].geometry.coordinates;
                 fs.unlink("./uploads/" + file.filename);
                 var newTrack = {
-                    name: file.originalname,
-                    data: geoj,
+                    id: file.originalname,
+                    type: "line",
+                    source: new midware.createGeoJSON(coords),
+                    paint: {
+                        "fill-color": "#00ffff"
+                    },
+                    layout: {
+                        "line-join": "round",
+                        "line-cap": "round"
+                    },
                     dist_km: geotools.getDistance(geoj.features[0].geometry.coordinates)
                 };
                 var message = "";
