@@ -12,12 +12,14 @@
 - [x] Restrictions.
 - [x] Multiple files.
 - [x] Integrate DB.
-- [?] Rendering. - formats compatability
+- [x] Rendering.
 - [ ] Log menu.
 - [ ] Map matching.
 - [ ] Use flash, refactor.
 - [x] Responsive design.
 - [ ] Animations.
 - [ ] Other formats.
+	- [x] myTrails
+	- [ ] 
 - [ ] PWA?
 - [ ] ...

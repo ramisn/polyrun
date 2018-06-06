@@ -24,7 +24,8 @@ exports.createGeoJSON = function(coords) {
             "type": "MultiLineString",
             "coordinates": coords
         }
-    }
+    };
+    this.tolerance = 3;
 }
 
 module.exports = exports;

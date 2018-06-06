@@ -1,11 +1,11 @@
-var homePos = [7.41, 51.505],
+var defaultPos = [7.41, 51.51],
     cityCenter = [7.43, 51.515];
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhZGVnMzAiLCJhIjoiY2pnd2lqY2plMDZ4NTJ4bnd6NHNtd2ZvdSJ9.5A_6NhPLS87JaYEAfyqHJA';
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v9',
-    center: homePos,
+    center: defaultPos,
     zoom: 14,
     maxZoom: 15
 });

@@ -61,14 +61,17 @@ app.post("/upload", function(req, res) {
             for (file of req.files) {
                 var gpxParsed = new DOMParser().parseFromString(fs.readFileSync("./uploads/" + file.filename, "utf-8"));
                 var geoj = togeojson.gpx(gpxParsed);
-                var coords = geoj.features[0].geometry.coordinates;
+                var temp = geoj.features[0].geometry.coordinates;
+                var coords = [temp];
                 fs.unlink("./uploads/" + file.filename);
                 var newTrack = {
                     id: file.originalname,
                     type: "line",
                     source: new midware.createGeoJSON(coords),
                     paint: {
-                        "fill-color": "#00ffff"
+                        "line-color": "#3de5e2",
+                        "line-width": 4,
+                        "line-opacity": 0.5
                     },
                     layout: {
                         "line-join": "round",
@@ -88,6 +91,9 @@ app.post("/upload", function(req, res) {
         }
     });
 });
+
+
+
 
 app.listen(port, function() {
 	console.log("listening on", port);
