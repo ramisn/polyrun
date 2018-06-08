@@ -58,22 +58,23 @@ form {margin-top: 50px;}
 
 .uploadBtn {
 	position: absolute;
-	width: 45px;
-	height: 45px;
-	border-radius: 50%;
-	bottom: 30px;
-	right: 30px;
-	background-color: #385;
+	width: 30px;
+	height: 30px;
+	border-radius: 4px;
+	top: 50px;
+	right: 10px;
+	background-color: #f2f2f2;
 }
 
-.uploadBtn h1 {
+.uploadBtn h2 {
+	color: #343434;
 	margin: 0;
-	padding: 3px 0 0 0;
+	padding: 2px 0 0 0;
 	text-align: center;
 }
 
 .uploadBtn:hover {
-	opacity: 0.8;
+	opacity: 0.9;
 }
 
 input:hover, .chooseBtn:hover {opacity: 0.8;}
@@ -101,4 +102,9 @@ input:hover, .chooseBtn:hover {opacity: 0.8;}
 		margin: 8px;
 	}
 	input {width: 204px;}
+	.uploadBtn {
+		top: 10px;
+		width: 40px;
+		height: 40px;
+	}
 }

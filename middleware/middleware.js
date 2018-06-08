@@ -34,8 +34,18 @@ exports.Track = function(id, source, dist, timeCreated) {
     this.type = "line";
     this.source = source;
     this.paint = {
-        "line-color": "#3de5e2",
-        "line-width": 4,
+        "line-color": "#38ede7",
+        "line-width": {
+            "type": "exponential",
+            "base": 2,
+            "stops": [
+                [5, 1],
+                [9, 2],
+                [11, 2.5],
+                [13, 3.2],
+                [15, 5]
+            ]
+        },
         "line-opacity": 0.5
     };
     this.layout = {
