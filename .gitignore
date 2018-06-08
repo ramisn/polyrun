@@ -1,3 +1,5 @@
 node_modules/
 uploads/
 *.geojson
+out.txt
+config.js

@@ -3,37 +3,18 @@ var	express     = require("express"),
     session     = require("express-session"),
 	mongoose    = require("mongoose"),
 	fs          = require("fs"),
-    multer      = require("multer"),
     bodyParser  = require("body-parser"),
 	geotools    = require("geojson-tools"),
 	togeojson   = require("togeojson"),
     DOMParser   = require("xmldom").DOMParser;
 	Track       = require("./models/Track"),
 	midware     = require("./middleware/middleware"),
-	app         = express(),
-    upload      = multer({
-        storage: multer.diskStorage({
-            destination: function(req, file, next) {
-                next(null, "./uploads")
-            }
-        }),
-        fileFilter: function(req, file, next) {
-            if (!file) next();
-            else {
-                if (file.mimetype && file.mimetype.includes("gpx")) {
-                    next(null, true);
-                } else {
-                    next({message: "file not supported."}, false);
-                }
-            }
-        },
-        limits: {
-            fileSize: 700000
-        }
-    }).array("gpxFile", 20),
+    CONFIG      = require("./middleware/config"),
+	app         = express();
+    
 	port        = process.env.PORT || 4545;
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://@ds217560.mlab.com:17560/polyrun');
+mongoose.connect(`mongodb://${CONFIG.USER}:${CONFIG.PASSWORD}@ds217560.mlab.com:17560/polyrun`);
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/views"));
@@ -56,44 +37,31 @@ app.get("/upload", function(req, res) {
 });
 
 app.post("/upload", function(req, res) {
-	upload(req, res, function(err) {
+	midware.upload(req, res, function(err) {
         if(!err) {
+            var filesCount = 0;
             for (file of req.files) {
-                var gpxParsed = new DOMParser().parseFromString(fs.readFileSync("./uploads/" + file.filename, "utf-8"));
-                var geoj = togeojson.gpx(gpxParsed);
-                var temp = geoj.features[0].geometry.coordinates;
-                var coords = [temp];
+                var geoj = togeojson.gpx(new DOMParser().parseFromString(fs.readFileSync("./uploads/" + file.filename, "utf-8")));
                 fs.unlink("./uploads/" + file.filename);
-                var newTrack = {
-                    id: file.originalname,
-                    type: "line",
-                    source: new midware.createGeoJSON(coords),
-                    paint: {
-                        "line-color": "#3de5e2",
-                        "line-width": 4,
-                        "line-opacity": 0.5
-                    },
-                    layout: {
-                        "line-join": "round",
-                        "line-cap": "round"
-                    },
-                    dist_km: geotools.getDistance(geoj.features[0].geometry.coordinates)
-                };
+
+                var coords = [geoj.features[0].geometry.coordinates];
+                var source = new midware.createGeoJSON(coords);
+                var dist_km = geotools.getDistance(geoj.features[0].geometry.coordinates);
+                var timeCreated = new Date(geoj.features[0].properties.time);
+                var newTrack = new midware.Track(file.originalname, source, dist_km, timeCreated);
+                
                 var message = "";
                 Track.create(newTrack, function(err, newlyCreated) {
                     if (err || !newlyCreated) { message = "Error while uploading file(s)."; }
                 });
             }
-            message = "Successfully added track(s).";
+            if (message.length === 0) { message = `Successfully added track(s).`; }
             res.render("upload", {message: message});
         } else {
             res.render("upload", {message: "A file is not supported or bigger than 700kB."});
         }
     });
 });
-
-
-
 
 app.listen(port, function() {
 	console.log("listening on", port);

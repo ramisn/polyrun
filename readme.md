@@ -1,8 +1,9 @@
-# A mapping tool for tracks
+# A mapping tool for recorded tracks
 ---
 
-    dependencies: mongoose express fs multer xmldom geojson-tools togeojson (connect-flash express-session)
+### To run locally (Nodejs)
 
+    dependencies: mongoose express fs multer xmldom geojson-tools togeojson (connect-flash express-session)
 ---
 
 ### Todo
@@ -13,13 +14,17 @@
 - [x] Multiple files.
 - [x] Integrate DB.
 - [x] Rendering.
-- [ ] Log menu.
-- [ ] Map matching.
-- [ ] Use flash, refactor.
 - [x] Responsive design.
+- [ ] Map matching.
+- [ ] Heatmap.
+- [ ] Log menu.
+- [ ] Use flash, refactor.
 - [ ] Animations.
-- [ ] Other formats.
+- [ ] Other sources
 	- [x] myTrails
-	- [ ] 
+	- [ ] Runkeeper
+	- [ ] Strava
+	- [ ] CSV?
 - [ ] PWA?
 - [ ] ...
+---

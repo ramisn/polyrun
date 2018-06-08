@@ -1,4 +1,5 @@
-Track = require("../models/Track"),
+var Track = require("../models/Track"),
+    multer = require("multer");
 
 exports.loadTracks = function(res) {
     var mapData = {
@@ -27,5 +28,43 @@ exports.createGeoJSON = function(coords) {
     };
     this.tolerance = 3;
 }
+
+exports.Track = function(id, source, dist, timeCreated) {
+    this.id = id;
+    this.type = "line";
+    this.source = source;
+    this.paint = {
+        "line-color": "#3de5e2",
+        "line-width": 4,
+        "line-opacity": 0.5
+    };
+    this.layout = {
+        "line-join": "round",
+        "line-cap": "round"
+    };
+    this.dist_km = dist;
+    this.timeCreated = timeCreated;
+}
+
+exports.upload = multer({
+        storage: multer.diskStorage({
+            destination: function(req, file, next) {
+                next(null, "./uploads")
+            }
+        }),
+        fileFilter: function(req, file, next) {
+            if (!file) next();
+            else {
+                if (file.mimetype && file.mimetype.includes("gpx")) {
+                    next(null, true);
+                } else {
+                    next({message: "file not supported."}, false);
+                }
+            }
+        },
+        limits: {
+            fileSize: 700000 //Bytes
+        }
+    }).array("gpxFile", 50);
 
 module.exports = exports;
