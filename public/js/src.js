@@ -1,10 +1,8 @@
-var defaultPos = [7.41, 51.51];
-
-mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhZGVnMzAiLCJhIjoiY2pnd2lqY2plMDZ4NTJ4bnd6NHNtd2ZvdSJ9.5A_6NhPLS87JaYEAfyqHJA';
+mapboxgl.accessToken = MAPBOX_API_KEY;
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v9',
-    center: defaultPos,
+    center: DEFAULT_POS,
     zoom: 12,
     maxZoom: 15
 });

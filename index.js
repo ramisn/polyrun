@@ -44,7 +44,7 @@ app.post("/upload", function(req, res) {
                 var geoj = togeojson.gpx(new DOMParser().parseFromString(fs.readFileSync("./uploads/" + file.filename, "utf-8")));
                 fs.unlink("./uploads/" + file.filename);
 
-                var coords = [geoj.features[0].geometry.coordinates];
+                var coords = geoj.features[0].geometry.coordinates;
                 var source = new midware.createGeoJSON(coords);
                 var dist_km = geotools.getDistance(geoj.features[0].geometry.coordinates);
                 var timeCreated = new Date(geoj.features[0].properties.time);

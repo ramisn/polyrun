@@ -40,7 +40,6 @@ a[href="/"] {
 h2 {
 	margin: 0;
 	padding-top: 30px;
-	
 }
 
 input[type=file] {display: none;}
@@ -63,14 +62,16 @@ form {margin-top: 50px;}
 	border-radius: 4px;
 	top: 50px;
 	right: 10px;
+	text-align: center;
 	background-color: #f2f2f2;
 }
 
-.uploadBtn h2 {
+.uploadBtn span {
 	color: #343434;
 	margin: 0;
-	padding: 2px 0 0 0;
-	text-align: center;
+	padding: 0;
+	font-size: 1.2em;
+	line-height: 30px;
 }
 
 .uploadBtn:hover {
@@ -102,9 +103,8 @@ input:hover, .chooseBtn:hover {opacity: 0.8;}
 		margin: 8px;
 	}
 	input {width: 204px;}
-	.uploadBtn {
-		top: 10px;
-		width: 40px;
-		height: 40px;
+	.uploadBtn h2 {
+		font-size: 2em;
+		line-height: 22px;
 	}
 }

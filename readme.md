@@ -15,16 +15,17 @@
 - [x] Integrate DB.
 - [x] Rendering.
 - [x] Responsive design.
-- [ ] Map matching.
+- [ ] Map matching/simplification.
 - [ ] Heatmap.
 - [ ] Log menu.
 - [ ] Use flash, refactor.
-- [ ] Animations.
+- [ ] Animations/styles.
 - [ ] Other sources
 	- [x] myTrails
 	- [ ] Runkeeper
 	- [ ] Strava
 	- [ ] CSV?
+- [ ] Accounts.
 - [ ] PWA?
 - [ ] ...
 ---

@@ -3,3 +3,4 @@ uploads/
 *.geojson
 out.txt
 config.js
+package-lock.json

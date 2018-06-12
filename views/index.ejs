@@ -7,15 +7,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" type="text/css" href="app.css">
   </head>
 
   <body>
     <div id='map' data-tracks='<%- JSON.stringify(mapData.tracks) %>' data-dist='<%= mapData.total_dist %>'></div>
-    <a href="/upload" title="Upload track"><div class="uploadBtn"><h2>↥</h2></div></a>
+    <a href="/upload" title="Upload track"><div class="uploadBtn"><span>⏏</span></div></a>
 
+    <script src="./js/config.js"></script>
     <script src="./js/src.js"></script>
   </body>
 </html>
