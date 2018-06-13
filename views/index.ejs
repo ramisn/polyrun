@@ -14,7 +14,12 @@
 
   <body>
     <div id='map' data-tracks='<%- JSON.stringify(mapData.tracks) %>' data-dist='<%= mapData.total_dist %>'></div>
-    <a href="/upload" title="Upload track"><div class="uploadBtn"><span>⏏</span></div></a>
+    <a href="/upload" title="Upload track"><div class="Btn uploadBtn"><span>⏏</span></div></a>
+    <div id="sidebarBtn" class="Btn sidebarBtn"><span>≔</span></div>
+    <div id="sidebar">
+      <h4 id="distDisplay">Distance tracked: </h4>
+      <div id="toggleTheme"></div>
+    </div>
 
     <script src="./js/config.js"></script>
     <script src="./js/src.js"></script>

@@ -3,13 +3,20 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v9',
     center: DEFAULT_POS,
-    zoom: 12,
+    zoom: 13,
     maxZoom: 15
 });
 
-var tracks = document.getElementById("map").dataset.tracks;
+var tracks = JSON.parse(document.getElementById("map").dataset.tracks);
 var distance = document.getElementById("map").dataset.dist;
-tracks = JSON.parse(tracks);
+
+document.getElementById("sidebarBtn").addEventListener("click", function() {
+    if(document.getElementById("sidebar").style.display === "block") {
+        document.getElementById("sidebar").style.display = "none";
+    } else document.getElementById("sidebar").style.display = "block";
+});
+
+document.getElementById("distDisplay").innerHTML += Math.round(distance * 100) / 100 + " Km"; 
 
 map.on('load', function () {
 

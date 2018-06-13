@@ -13,6 +13,19 @@ body {
 	margin: 0 auto;
 }
 
+#sidebar {
+	display: none;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	position: absolute;
+	background-color: #eee;
+	height: 100%;
+	width: 250px;
+	padding: 10px;
+	color: #222;
+}
+
 input, .chooseBtn {
 	color: #222;
 	display: inline-block;
@@ -55,18 +68,21 @@ form {margin-top: 50px;}
 	margin: 50px auto;
 }
 
-.uploadBtn {
+.Btn {
 	position: absolute;
 	width: 30px;
 	height: 30px;
 	border-radius: 4px;
-	top: 50px;
-	right: 10px;
 	text-align: center;
 	background-color: #f2f2f2;
+	right: 10px;
 }
 
-.uploadBtn span {
+.uploadBtn { top: 50px; }
+
+.sidebarBtn { top: 90px; }
+
+.Btn span {
 	color: #343434;
 	margin: 0;
 	padding: 0;
@@ -74,8 +90,9 @@ form {margin-top: 50px;}
 	line-height: 30px;
 }
 
-.uploadBtn:hover {
+.Btn:hover {
 	opacity: 0.9;
+	cursor: pointer;
 }
 
 input:hover, .chooseBtn:hover {opacity: 0.8;}
