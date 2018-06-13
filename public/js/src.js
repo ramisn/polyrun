@@ -9,7 +9,7 @@ var map = new mapboxgl.Map({
 
 var tracks = document.getElementById("map").dataset.tracks;
 var distance = document.getElementById("map").dataset.dist;
-tracks = JSON.parse(tracks)[0];
+tracks = JSON.parse(tracks);
 
 map.on('load', function () {
 
@@ -25,6 +25,7 @@ map.on('load', function () {
     map.addControl(new mapboxgl.GeolocateControl({
         trackUserLocation: true
     }));
-
-    map.addLayer(tracks, firstSymbolId);
+    for (var i=0; i<tracks.length; i++) {
+        map.addLayer(tracks[i], firstSymbolId);
+    }
 });
