@@ -7,7 +7,7 @@ trackSchema = new mongoose.Schema({
 	source: Object,
 	paint: Object,
 	layout: Object,
-	dist_km: Number,
+	dist_km: { type: Number, default: 0 },
 	timeCreated: { type: Date, default: Date.now }
 });
 

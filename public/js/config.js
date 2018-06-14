@@ -1,0 +1,2 @@
+const MAPBOX_API_KEY  = "YOUR MAPBOX API KEY",
+	  DEFAULT_POS 	  = [70.41, 51.51];

@@ -43,13 +43,16 @@ app.post("/upload", function(req, res) {
             for (file of req.files) {
                 var geoj = togeojson.gpx(new DOMParser().parseFromString(fs.readFileSync("./uploads/" + file.filename, "utf-8")));
                 fs.unlink("./uploads/" + file.filename);
-
-                var coords = midware.simplify(geoj.features[0].geometry.coordinates, 0.000085);     // about 10x smaller arrays
+                
+                var coords = geoj.features[0].geometry.coordinates;
+                if (coords.length > 100) {
+                    coords = midware.simplify(coords, 0.000082);    // about 10x smaller arrays, only when needed
+                }
                 var source = new midware.createGeoJSON(coords);
                 var dist_km = geotools.getDistance(geoj.features[0].geometry.coordinates);
-                var timeCreated = new Date(geoj.features[0].properties.time);
+                var timeCreated = midware.extractDate(geoj);
                 var newTrack = new midware.Track(file.originalname, source, dist_km, timeCreated);
-                
+
                 var message = "";
                 Track.create(newTrack, function(err, newlyCreated) {
                     if (err || !newlyCreated) { message = "Error while uploading file(s)."; }

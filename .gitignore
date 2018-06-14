@@ -1,6 +1,7 @@
 node_modules/
 uploads/
 *.geojson
-out.txt
-config.js
+*.txt
+myconfig.js
 package-lock.json
+test.js

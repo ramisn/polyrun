@@ -70,6 +70,14 @@ exports.Track = function(id, source, dist, timeCreated) {
     this.timeCreated = timeCreated;
 }
 
+exports.extractDate = function(geoj) {
+    if (geoj.hasOwnProperty("features") 
+        && geoj.features[0].hasOwnProperty("properties") 
+        && geoj.features[0].properties.hasOwnProperty("time")) {
+        return new Date(geoj.features[0].properties.time);
+    } else return Date.now();
+}
+
 exports.upload = multer({
         storage: multer.diskStorage({
             destination: function(req, file, next) {

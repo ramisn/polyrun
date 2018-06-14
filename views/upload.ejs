@@ -14,7 +14,7 @@
 		<h2><a href="/upload">Upload a GPX file</a></h2>
 		<form enctype="multipart/form-data" method="post" action="/upload">
 			<label class="chooseBtn">
-    			<input name="gpxFile" type="file" id="fileUpload" multiple>
+    			<input name="gpxFile" type="file" id="fileUpload" accept=".gpx, application/gpx+xml" multiple>
     			Choose file
 				</label>
 			<input type="submit" name="send" value="Send">

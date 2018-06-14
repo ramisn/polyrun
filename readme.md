@@ -11,20 +11,21 @@
 - [x] Initial setup.
 - [x] Manually add files.
 - [x] Restrictions.
+	- [ ] client side.
 - [x] Multiple files.
 - [x] Integrate DB.
 - [x] Rendering.
 - [x] Responsive design.
+- [x] Log menu.
 - [ ] Map matching/simplification.
 - [ ] Heatmap.
-- [ ] Log menu.
 - [ ] Use flash, refactor.
 - [ ] Animations/styles.
 - [ ] Other sources
 	- [x] myTrails
 	- [ ] Runkeeper
 	- [ ] Strava
-	- [ ] CSV?
+	- [ ] CSV
 - [ ] Accounts.
 - [ ] PWA?
 - [ ] ...
